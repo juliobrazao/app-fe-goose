@@ -1,4 +1,4 @@
-import { UserPayload } from "../../helpers/userSchema";
+import { UserPayload } from "../helpers/userSchema";
 
 interface UserBoxProps {
   userProps: UserPayload;

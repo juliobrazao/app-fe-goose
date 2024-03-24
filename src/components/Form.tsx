@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserSchema, UserType } from "../../helpers/userSchema";
+import { UserSchema, UserType } from "../helpers/userSchema";
 
 export default function Form() {
   const {
