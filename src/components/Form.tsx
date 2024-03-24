@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSchema, UserType } from "../helpers/userSchema";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
 export default function Form() {
   const {
@@ -11,6 +13,8 @@ export default function Form() {
   } = useForm<UserType>({
     resolver: zodResolver(UserSchema),
   });
+
+  const { listHasChanged, setListHasChanged } = useContext(AppContext);
 
   const printPayload = (data: UserType) => {
     fetch(
@@ -25,6 +29,7 @@ export default function Form() {
     )
       .then(function () {
         reset();
+        setListHasChanged(!listHasChanged);
       })
       .catch((err) => console.log(err));
   };

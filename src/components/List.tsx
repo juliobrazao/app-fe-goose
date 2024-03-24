@@ -2,9 +2,10 @@ import { Key, useContext, useEffect } from "react";
 import UserBox from "./UserBox";
 import { AppContext } from "../contexts/AppContext";
 import { UserPayload } from "../helpers/userSchema";
+import Dialog from "./Dialog";
 
 export default function List() {
-  const { usersList, setUsersList } = useContext(AppContext);
+  const { usersList, setUsersList, listHasChanged } = useContext(AppContext);
 
   const fetchUsers = async () => {
     fetch(
@@ -16,7 +17,7 @@ export default function List() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [listHasChanged]);
 
   return (
     <>

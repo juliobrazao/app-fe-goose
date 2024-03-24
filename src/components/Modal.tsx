@@ -17,7 +17,7 @@ export default function Modal({ title, buttonTitle, children }: ModalProps) {
         {buttonTitle || title}
       </button>
 
-      <div className="modal" tabIndex={-1} id="genericModal">
+      <div className="modal fade" tabIndex={-1} id="genericModal">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
