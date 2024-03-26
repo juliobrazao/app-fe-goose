@@ -1,11 +1,8 @@
-import { ReactNode, useState } from "react";
 import "../src/App.css";
-import Form from "./components/Form";
-import List from "./components/List";
-import Modal from "./components/Modal";
-import { AppContext } from "./contexts/AppContext";
-import { UserPayload } from "./helpers/userSchema";
-import Navbar from "./components/Navbar";
+import { ReactNode, useContext } from "react";
+import { AppContext, AppContextProps } from "./contexts/AppContext";
+import { Button } from "react-bootstrap";
+import FormModal from "./components/FormModal";
 
 interface AppProps {
   children: ReactNode;
@@ -15,38 +12,31 @@ function AppContainer({ children }: AppProps) {
   return <div className="container-fluid mt-3">{children}</div>;
 }
 
-function AddUserModal() {
-  return (
-    <Modal title="Create New User">
-      <Form />
-    </Modal>
-  );
-}
-
 export default function App() {
-  const [usersList, setUsersList] = useState<UserPayload[]>([]);
-  const [listHasChanged, setListHasChanged] = useState<boolean>(false);
-  const [showDialog, setShowDialog] = useState<boolean>(false);
+  const { handleToggleModal } = useContext<AppContextProps>(AppContext);
 
   return (
-    <>
-      <AppContext.Provider
-        value={{
-          usersList,
-          setUsersList,
-          listHasChanged,
-          setListHasChanged,
-          showDialog,
-          setShowDialog,
-        }}
-      >
-        <Navbar title="User creator">
-          <AddUserModal />
-        </Navbar>
-        <AppContainer>
-          <List />
-        </AppContainer>
-      </AppContext.Provider>
-    </>
+    <AppContainer>
+      <Button variant="info" onClick={handleToggleModal}>
+        Call Modal
+      </Button>
+      <FormModal
+        buttons={[
+          {
+            innerText: "Confirm",
+            variant: "primary",
+            method: function () {
+              alert("hello!");
+              handleToggleModal();
+            },
+          },
+          {
+            innerText: "Dismiss",
+            variant: "secondary",
+            method: handleToggleModal,
+          },
+        ]}
+      />
+    </AppContainer>
   );
 }
