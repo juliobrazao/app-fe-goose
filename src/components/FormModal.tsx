@@ -2,10 +2,12 @@ import CustomModal, { CustomModalActionButton } from "./CustomModal";
 
 interface FormModalProps {
   title?: string;
+  iconType?: "warning" | "info" | "danger";
   buttons?: CustomModalActionButton[];
 }
 export default function FormModal({
   title,
+  iconType,
   buttons = [
     {
       innerText: "Dismiss",
@@ -15,7 +17,7 @@ export default function FormModal({
   ],
 }: Partial<FormModalProps>) {
   return (
-    <CustomModal title={title} actionButtons={buttons}>
+    <CustomModal title={title} actionButtons={buttons} iconType={iconType}>
       <div className="form-check">
         <input className="form-check-input" type="checkbox" value="" id="" />
         <label className="form-check-label" htmlFor="">

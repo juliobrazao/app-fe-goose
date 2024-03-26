@@ -21,6 +21,8 @@ export default function App() {
         Call Modal
       </Button>
       <FormModal
+        title="Be careful!"
+        iconType="warning"
         buttons={[
           {
             innerText: "Confirm",

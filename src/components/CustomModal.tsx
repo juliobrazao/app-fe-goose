@@ -2,6 +2,11 @@ import { MouseEventHandler, ReactNode, useContext } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import { AppContext, AppContextProps } from "../contexts/AppContext";
+import {
+  ExclamationCircleFill,
+  InfoCircleFill,
+  XCircleFill,
+} from "react-bootstrap-icons";
 
 export type CustomModalActionButton = {
   innerText?: string;
@@ -11,12 +16,20 @@ export type CustomModalActionButton = {
 
 interface CustomModalProps {
   title?: string;
+  iconType?: "warning" | "info" | "danger";
   actionButtons?: CustomModalActionButton[];
   children?: ReactNode | string | null;
 }
 
+const iconTypesAndComponents = {
+  warning: <ExclamationCircleFill color="yellow" />,
+  info: <InfoCircleFill color="blue" />,
+  danger: <XCircleFill color="red" />,
+};
+
 export default function CustomModal({
   title,
+  iconType,
   children,
   actionButtons,
 }: Partial<CustomModalProps>) {
@@ -25,7 +38,11 @@ export default function CustomModal({
   return (
     <>
       <Modal show={showModal}>
-        <Modal.Header>{title}</Modal.Header>
+        <Modal.Header>
+          {iconType && iconTypesAndComponents[iconType]}
+          &nbsp;&nbsp;
+          {title}
+        </Modal.Header>
 
         <Modal.Body>{children}</Modal.Body>
 
